@@ -1,18 +1,16 @@
 
-const baseUrl= 'https://trefle.io/api/v1/plants?token=IStUS451yET7aU6HoqFv5cLSGc_IEP64VIcL1Bssm6Q'
+const baseUrl = "https://trefle.io/api/v1/plants?token=IStUS451yET7aU6HoqFv5cLSGc_IEP64VIcL1Bssm6Q";
+const url = "https://corsproxy.io/?" + encodeURIComponent(baseUrl);
 
 async function fetchPlants() {
   try {
    
-    const response = await fetch(`${baseUrl}`,{
-        mode: "no-cors", 
-        // headers:{
-        //     'Access-Control-Allow-Origin':'no-cors',
-        //     'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'
-        //     }
-        }
+    const response = await fetch(`${url}`
     );
+
+    console.log(response)
     const plants = await response.json();
+    console.log(plants)
 
     const container = document.querySelector('#container');
     plants.data.forEach(plant => {
@@ -30,8 +28,9 @@ async function fetchPlants() {
       container.appendChild(plantCard);
     });
   } catch (error) {
+    console.log(error)
     
   }
 }
 
-fetchPlants();
+ fetchPlants();
